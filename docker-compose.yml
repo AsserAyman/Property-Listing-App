@@ -3,9 +3,14 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: backend
-    restart: always
+    restart: unless-stopped
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - '8000:8000'
     depends_on:
@@ -20,9 +25,14 @@ services:
       - DATABASE_NAME=property_db
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: frontend
-    restart: always
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - '3000:3000'
     depends_on:
