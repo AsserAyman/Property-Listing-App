@@ -3,11 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4">
-      <header className="flex justify-between items-center py-4">
-        <h1 className="text-3xl font-bold text-blue-800">Nawy</h1>
-      </header>
-      
+    <div className="container mx-auto px-4">      
       <main className="flex flex-col md:flex-row items-center justify-between py-12 ">
         <div className="md:w-1/2 mb-8 md:mb-0">
           <h1 className="text-4xl font-bold mb-4">Find Your Dream Home</h1>
