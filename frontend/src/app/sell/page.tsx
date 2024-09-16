@@ -27,7 +27,7 @@ export default function SellPage() {
         e.preventDefault();
         try {
             console.log(formData);
-            const response = await fetch('http://localhost:8000/property', {
+            const response = await fetch('http://localhost:8000/api/property', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

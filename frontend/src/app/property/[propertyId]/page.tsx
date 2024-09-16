@@ -15,7 +15,7 @@ export default function PropertyDetailsPage({
   useEffect(() => {
     async function fetchPropertyDetails() {
       try {
-        const response = await fetch(`http://localhost:8000/property/${params.propertyId}`);
+        const response = await fetch(`http://localhost:8000/api/property/${params.propertyId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch property details');
         }

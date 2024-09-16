@@ -10,7 +10,7 @@ export default function PropertiesPage() {
   useEffect(() => {
     async function fetchProperties() {
       try {
-        const response = await fetch('http://localhost:8000/property');
+        const response = await fetch('http://localhost:8000/api/property');
         if (!response.ok) {
           throw new Error('Failed to fetch properties');
         }
