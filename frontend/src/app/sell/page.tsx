@@ -1,10 +1,12 @@
 "use client"
 import { useState } from 'react';
+import { propertyTypes } from '@/constants/propertyTypes';
+import { locations } from '@/constants/locations';
 
 export default function SellPage() {
     const [formData, setFormData] = useState({
         propertyType: '',
-        price: '',
+        price: '100000',
         beds: 1,
         baths: 1,
         project: ''
@@ -24,6 +26,7 @@ export default function SellPage() {
         // Here you would typically send the data to your backend
     };
 
+
     return (
         <div className="container mx-auto px-4 flex justify-center items-center min-h-screen">
             <div className="w-full max-w-md">
@@ -42,13 +45,11 @@ export default function SellPage() {
                             required
                         >
                             <option value="">Select a property type</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="villa">Villa</option>
-                            <option value="studio">Studio</option>
-                            <option value="twinhouse">Twinhouse</option>
-                            <option value="townhouse">Townhouse</option>
-                            <option value="duplex">Duplex</option>
-                            <option value="chalet">Chalet</option>
+                            {propertyTypes.map(({ value, label }) => (
+                                <option key={value} value={value}>
+                                    {label}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="mb-4">
@@ -62,6 +63,8 @@ export default function SellPage() {
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
+                            min="100000"
+                            step="100000"
                             required
                         />
                     </div>
@@ -97,7 +100,7 @@ export default function SellPage() {
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="project">
-                            Project
+                            Location
                         </label>
                         <select
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -107,9 +110,12 @@ export default function SellPage() {
                             onChange={handleChange}
                             required
                         >
-                            <option value="">Select a project</option>
-                            <option value="tagSultan">Tag Sultan</option>
-                            <option value="mountainView">Mountain View</option>
+                            <option value="">Select a location</option>
+                            {locations.map(({ value, label }) => (
+                                <option key={value} value={value}>
+                                    {label}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="flex items-center justify-center">

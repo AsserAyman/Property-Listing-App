@@ -1,16 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
-interface Property {
-  id: number;
-  type: string;
-  location: string;
-  price: number;
-  area: number;
-  noBeds: number;
-  noBaths: number;
-}
+import { Property } from '@/types/property';
 
 export default function PropertyDetailsPage({
   params,
