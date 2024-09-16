@@ -5,25 +5,49 @@ import { locations } from '@/constants/locations';
 
 export default function SellPage() {
     const [formData, setFormData] = useState({
-        propertyType: '',
-        price: '100000',
-        beds: 1,
-        baths: 1,
-        project: ''
+        type: '',
+        price: 100000,
+        noBeds: 1,
+        noBaths: 1,
+        location: '',
+        area: 50
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: ['price', 'noBeds', 'noBaths', 'area'].includes(name)
+                ? Number(value) 
+                : value
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
-        // Here you would typically send the data to your backend
+        try {
+            console.log(formData);
+            const response = await fetch('http://localhost:8000/property', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to submit property data');
+            }
+            
+            const result = await response.json();
+            console.log('Property submitted successfully:', result);
+            // Redirect to the property page after successful submission
+            window.location.href = '/property';
+            // You might want to add some user feedback here, like a success message
+        } catch (error) {
+            console.error('Error submitting property:', error);
+            // You might want to add some user feedback here, like an error message
+        }
     };
 
 
@@ -38,9 +62,9 @@ export default function SellPage() {
                         </label>
                         <select
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="propertyType"
-                            name="propertyType"
-                            value={formData.propertyType}
+                            id="type"
+                            name="type"
+                            value={formData.type}
                             onChange={handleChange}
                             required
                         >
@@ -63,8 +87,8 @@ export default function SellPage() {
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
-                            min="100000"
-                            step="100000"
+                            min={100000}
+                            step={100000}
                             required
                         />
                     </div>
@@ -74,12 +98,12 @@ export default function SellPage() {
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="beds"
+                            id="noBeds"
                             type="number"
-                            name="beds"
-                            value={formData.beds}
+                            name="noBeds"
+                            value={formData.noBeds}
                             onChange={handleChange}
-                            min="1"
+                            min={1}
                             required
                         />
                     </div>
@@ -89,24 +113,39 @@ export default function SellPage() {
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="baths"
+                            id="noBaths"
                             type="number"
-                            name="baths"
-                            value={formData.baths}
+                            name="noBaths"
+                            value={formData.noBaths}
                             onChange={handleChange}
-                            min="1"
+                            min={1}
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="area">
+                            Area (m²)
+                        </label>
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="area"
+                            type="number"
+                            name="area"
+                            value={formData.area}
+                            onChange={handleChange}
+                            min={1}
                             required
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="project">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
                             Location
                         </label>
                         <select
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="project"
-                            name="project"
-                            value={formData.project}
+                            id="location"
+                            name="location"
+                            value={formData.location}
                             onChange={handleChange}
                             required
                         >
