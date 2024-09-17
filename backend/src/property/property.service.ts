@@ -15,8 +15,15 @@ export class PropertyService {
     return this.propertyRepository.save(createPropertyDto);
   }
 
-  findAll(): Promise<Property[]> {
-    return this.propertyRepository.find();
+  async findAll(
+    page: number = 1,
+    limit: number = 9,
+  ): Promise<{ properties: Property[]; total: number }> {
+    const [properties, total] = await this.propertyRepository.findAndCount({
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    return { properties, total };
   }
 
   async findOne(id: number): Promise<Property> {

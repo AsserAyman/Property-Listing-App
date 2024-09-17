@@ -2,27 +2,33 @@
 import PropertyCard from '@/components/PropertyCard';
 import { Property } from '@/types/property';
 import { useState, useEffect } from 'react';
-
+import Pagination from '@/components/Pagination';
 
 export default function PropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalProperties, setTotalProperties] = useState(0);
+  const pageSize = 9;
 
   useEffect(() => {
     async function fetchProperties() {
       try {
-        const response = await fetch('http://localhost:8000/api/property');
+        const response = await fetch(`http://localhost:8000/api/property?page=${currentPage}&limit=${pageSize}`);
         if (!response.ok) {
           throw new Error('Failed to fetch properties');
         }
         const data = await response.json();
-        setProperties(data);
+        setProperties(data.properties);
+        setTotalProperties(data.total);
       } catch (error) {
         console.error('Error fetching properties:', error);
       }
     }
 
     fetchProperties();
-  }, []);
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(totalProperties / pageSize);
 
   return (
     <div className="container mx-auto px-4">
@@ -32,6 +38,11 @@ export default function PropertiesPage() {
           <PropertyCard key={property.id} property={property} />
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

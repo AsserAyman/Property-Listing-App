@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 import { Property } from './entities/property.entity';
 
 @ApiTags('properties')
@@ -27,8 +27,10 @@ export class PropertyController {
     description: 'Return all properties.',
     type: [Property],
   })
-  findAll() {
-    return this.propertyService.findAll();
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 9) {
+    return this.propertyService.findAll(page, limit);
   }
 
   @Get(':id')
