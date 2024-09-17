@@ -1,5 +1,5 @@
-import { PropertyLocation } from '../enums/property-location.enum';
 import { PropertyType } from '../enums/property-type.enum';
+import { Project } from '../enums/property-project.enum';
 import { IsEnum, IsNumber, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -8,16 +8,13 @@ export class CreatePropertyDto {
   @IsEnum(PropertyType)
   type: PropertyType;
 
-  @ApiProperty({
-    enum: PropertyLocation,
-    description: 'Location of the property',
-  })
-  @IsEnum(PropertyLocation)
-  location: PropertyLocation;
+  @ApiProperty({ enum: Project, description: 'Project of the property' })
+  @IsEnum(Project)
+  project: Project;
 
   @ApiProperty({ minimum: 100000, description: 'Price of the property in EGP' })
   @IsNumber()
-  @Min(100000) // Minimum price is 100,000 EGP to avoid scams
+  @Min(100000)
   price: number;
 
   @ApiProperty({

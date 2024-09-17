@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { PropertyType } from '../enums/property-type.enum';
-import { PropertyLocation } from '../enums/property-location.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { Project as ProjectEntity } from './project.entity';
 
 @Entity()
 export class Property {
@@ -16,15 +16,9 @@ export class Property {
   })
   type: PropertyType;
 
-  @ApiProperty({
-    enum: PropertyLocation,
-    description: 'Location of the property',
-  })
-  @Column({
-    type: 'enum',
-    enum: PropertyLocation,
-  })
-  location: PropertyLocation;
+  @ApiProperty({ description: 'Project information of the property' })
+  @ManyToOne(() => ProjectEntity)
+  projectInfo: ProjectEntity;
 
   @ApiProperty({ description: 'Price of the property in EGP' })
   @Column()

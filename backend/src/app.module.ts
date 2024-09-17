@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PropertyModule } from './property/property.module';
+import { SeederModule } from './seeders/seeder.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { PropertyModule } from './property/property.module';
       synchronize: true,
     }),
     PropertyModule,
+    SeederModule,
   ],
   controllers: [],
   providers: [],

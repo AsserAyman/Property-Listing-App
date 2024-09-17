@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { propertyTypes } from '@/constants/propertyTypes';
-import { locations } from '@/constants/locations';
+import { projects } from '@/constants/projects';
 
 export default function SellPage() {
     const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ export default function SellPage() {
         price: 100000,
         noBeds: 1,
         noBaths: 1,
-        location: '',
+        project: '',
         area: 50
     });
 
@@ -41,15 +41,11 @@ export default function SellPage() {
             
             const result = await response.json();
             console.log('Property submitted successfully:', result);
-            // Redirect to the property page after successful submission
             window.location.href = '/property';
-            // You might want to add some user feedback here, like a success message
         } catch (error) {
             console.error('Error submitting property:', error);
-            // You might want to add some user feedback here, like an error message
         }
     };
-
 
     return (
         <div className="container mx-auto px-4 flex justify-center items-center min-h-screen">
@@ -138,19 +134,19 @@ export default function SellPage() {
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
-                            Location
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="project">
+                            Project
                         </label>
                         <select
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="location"
-                            name="location"
-                            value={formData.location}
+                            id="project"
+                            name="project"
+                            value={formData.project}
                             onChange={handleChange}
                             required
                         >
-                            <option value="">Select a location</option>
-                            {locations.map(({ value, label }) => (
+                            <option value="">Select a project</option>
+                            {projects.map(({ value, label }) => (
                                 <option key={value} value={value}>
                                     {label}
                                 </option>

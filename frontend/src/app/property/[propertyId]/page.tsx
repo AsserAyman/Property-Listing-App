@@ -42,13 +42,13 @@ export default function PropertyDetailsPage({
         <div className="relative h-64 sm:h-80 md:h-96">
           <Image
             src="/placeholder-property-image.jpg"
-            alt={`${property.type} in ${property.location}`}
+            alt={`${property.type} in ${property.projectInfo.project}`}
             layout="fill"
             objectFit="cover"
           />
         </div>
         <div className="p-6">
-          <h1 className="text-3xl font-bold mb-4">{property.type} in {property.location}</h1>
+          <h1 className="text-3xl font-bold mb-4">{property.type} in {property.projectInfo.project}</h1>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
               <p className="text-gray-600">Price</p>
@@ -75,8 +75,16 @@ export default function PropertyDetailsPage({
                 <p className="font-semibold">{property.type}</p>
               </div>
               <div>
+                <p className="text-gray-600">Project</p>
+                <p className="font-semibold">{property.projectInfo.project}</p>
+              </div>
+              <div>
+                <p className="text-gray-600">Developer</p>
+                <p className="font-semibold">{property.projectInfo.developer}</p>
+              </div>
+              <div>
                 <p className="text-gray-600">Location</p>
-                <p className="font-semibold">{property.location}</p>
+                <p className="font-semibold">{property.projectInfo.location}</p>
               </div>
             </div>
           </div>

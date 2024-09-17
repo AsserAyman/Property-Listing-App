@@ -8,14 +8,15 @@ export default function PropertyCard({ property }: { property: Property }) {
             <div className="relative h-48">
                 <Image
                 src="/placeholder-property-image.jpg"
-                alt={`${property.type} in ${property.location}`}
+                alt={`${property.type} in ${property.projectInfo.project}`}
                 layout="fill"
                 objectFit="cover"
               />
             </div>
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{property.type}</h2>
-              <p className="text-gray-600 mb-2">{property.location}</p>
+              <p className="text-gray-600 mb-2">{property.projectInfo.project}</p>
+              <p className="text-gray-600 mb-2">{property.projectInfo.location}</p>
               <p className="text-lg font-bold mb-2">{property.price.toLocaleString()} EGP</p>
               <div className="flex justify-between text-sm text-gray-500">
                 <span>{property.area} m²</span>

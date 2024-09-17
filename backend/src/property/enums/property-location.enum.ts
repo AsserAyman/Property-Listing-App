@@ -1,12 +1,8 @@
-export enum PropertyLocation {
-  CAIRO = 'cairo',
-  GIZA = 'giza',
-  ASWAN = 'aswan',
-  LUXOR = 'luxor',
-  ALEXANDRIA = 'alexandria',
-  DAHAB = 'dahab',
-  SHARM_EL_SHEIKH = 'sharm_el_sheikh',
-  HURGHADA = 'hurghada',
-  NORTH_COAST = 'north_coast',
-  AIN_SOKHNA = 'ain_sokhna',
+export enum Location {
+  NEW_CAIRO = 'New Cairo',
+  MOSTAKBAL_CITY = 'Mostakbal City',
+  NEW_CAPITAL = 'New Capital',
+  NORTH_COAST = 'North Coast',
+  AIN_SOKHNA = 'Ain Sokhna',
+  RAS_EL_HEKMA = 'Ras El Hekma',
 }
