@@ -34,12 +34,26 @@ export class PropertyService {
   async findAll(
     page: number = 1,
     limit: number = 9,
+    search: string = '',
   ): Promise<{ properties: Property[]; total: number }> {
-    const [properties, total] = await this.propertyRepository.findAndCount({
-      relations: ['projectInfo'],
-      take: limit,
-      skip: (page - 1) * limit,
-    });
+    const queryBuilder = this.propertyRepository
+      .createQueryBuilder('property')
+      .leftJoinAndSelect('property.projectInfo', 'project_info');
+
+    if (search) {
+      queryBuilder.where(
+        '(project_info.project::text ILIKE :search OR ' +
+          'project_info.location::text ILIKE :search OR ' +
+          'project_info.developer::text ILIKE :search)',
+        { search: `%${search}%` },
+      );
+    }
+
+    const [properties, total] = await queryBuilder
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount();
+
     return { properties, total };
   }
 
