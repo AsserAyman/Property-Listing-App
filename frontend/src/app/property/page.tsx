@@ -4,6 +4,7 @@ import { Property } from '@/types/property';
 import { useState, useEffect } from 'react';
 import Pagination from '@/components/Pagination';
 import SearchBar from '@/components/SearchBar';
+import { propertyService } from '@/api/propertyService';
 
 export default function PropertiesPage() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -14,19 +15,10 @@ export default function PropertiesPage() {
 
   useEffect(() => {
     async function fetchProperties() {
-      try {
-        const response = await fetch(`http://localhost:8000/api/property?page=${currentPage}&limit=${pageSize}&search=${searchTerm}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch properties');
-        }
-        const data = await response.json();
+        const data = await propertyService.getAll(currentPage, pageSize, searchTerm);
         setProperties(data.properties);
         setTotalProperties(data.total);
-      } catch (error) {
-        console.error('Error fetching properties:', error);
-      }
     }
-
     fetchProperties();
   }, [currentPage, searchTerm]);
 

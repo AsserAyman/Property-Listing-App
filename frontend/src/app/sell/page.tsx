@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { propertyTypes } from '@/constants/propertyTypes';
 import { projects } from '@/constants/projects';
+import { propertyService } from '@/api/propertyService';
 
 export default function SellPage() {
     const [formData, setFormData] = useState({
@@ -25,26 +26,8 @@ export default function SellPage() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            console.log(formData);
-            const response = await fetch('http://localhost:8000/api/property', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to submit property data');
-            }
-            
-            const result = await response.json();
-            console.log('Property submitted successfully:', result);
-            window.location.href = '/property';
-        } catch (error) {
-            console.error('Error submitting property:', error);
-        }
+        await propertyService.create(formData);
+        window.location.href = '/property';
     };
 
     return (

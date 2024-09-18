@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Property } from '@/types/property';
+import { propertyService } from '@/api/propertyService';
 
 export default function PropertyDetailsPage({
   params,
@@ -9,31 +10,15 @@ export default function PropertyDetailsPage({
   params: { propertyId: string };
 }) {
   const [property, setProperty] = useState<Property | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchPropertyDetails() {
-      try {
-        const response = await fetch(`http://localhost:8000/api/property/${params.propertyId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch property details');
-        }
-        const data = await response.json();
+        const data = await propertyService.getById(params.propertyId);
         setProperty(data);
-      } catch (err) {
-        setError('Error fetching property details');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
     }
-
     fetchPropertyDetails();
   }, [params.propertyId]);
 
-  if (loading) return <div className="text-center mt-8">Loading...</div>;
-  if (error) return <div className="text-center mt-8 text-red-500">{error}</div>;
   if (!property) return <div className="text-center mt-8">Property not found</div>;
 
   return (
