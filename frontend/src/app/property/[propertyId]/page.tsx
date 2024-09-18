@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Property } from '@/types/property';
 import { propertyService } from '@/api/propertyService';
+import { projectImages } from '@/constants/projectImages';
 
 export default function PropertyDetailsPage({
   params,
@@ -21,15 +22,17 @@ export default function PropertyDetailsPage({
 
   if (!property) return <div className="text-center mt-8">Property not found</div>;
 
+  const imagePath = projectImages[property.projectInfo.project as keyof typeof projectImages] || '/images/placeholder-image.jpg';
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="relative h-64 sm:h-80 md:h-96">
           <Image
-            src="/placeholder-property-image.jpg"
+            src={imagePath}
             alt={`${property.type} in ${property.projectInfo.project}`}
-            layout="fill"
-            objectFit="cover"
+            fill
+            objectFit='contain'
           />
         </div>
         <div className="p-6">
