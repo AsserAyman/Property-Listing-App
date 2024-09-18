@@ -14,11 +14,34 @@ pnpm dev
 bun dev
 ```
 
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/`: Next.js app router pages
+- `src/components/`: Reusable React components
+- `src/api/`: API client and services
+- `src/types/`: TypeScript type definitions
+- `src/constants/`: Constant values used across the application
+
+## Key Components
+
+- `PropertyCard`: Displays individual property information
+- `SearchBar`: Allows users to search for properties
+- `Pagination`: Handles pagination for property listings
+
+## State Management
+
+This project uses React's built-in useState and useEffect hooks for local state management.
+
+## Styling
+
+Tailwind CSS is used for styling components and layouts.
+
+## API Integration
+
+The `propertyService` in `src/api/propertyService.ts` handles all API calls to the backend.
 
 ## Learn More
 

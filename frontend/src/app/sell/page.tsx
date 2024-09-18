@@ -14,6 +14,7 @@ export default function SellPage() {
         area: 50
     });
 
+    // Handle form changes and correctly parse the needed data to numbers
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => ({

@@ -22,6 +22,12 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Project Structure
+
+- `src/property/`: Property module (controllers, services, entities, DTOs)
+- `src/seeders/`: Database seeders for initial data
+- `src/main.ts`: Application entry point
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -69,6 +75,21 @@ Check out a few resources that may come in handy when working with NestJS:
 - Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
 - To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+
+## API Documentation
+
+Swagger UI is used for API documentation. When the application is running, you can access the API docs at:
+
+http://localhost:8000/api/docs
+
+## Database
+
+This project uses PostgreSQL as the database. The connection is configured in `src/app.module.ts`.
+
+## Data Seeding
+
+Initial data is seeded using the `MainSeeder` in `src/seeders/main.seeder.ts`. This runs automatically when the application starts.
 
 ## Support
 
