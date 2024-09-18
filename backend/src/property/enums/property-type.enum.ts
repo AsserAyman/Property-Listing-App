@@ -1,7 +1,7 @@
 export enum PropertyType {
-  APARTMENT = 'apartment',
-  VILLA = 'villa',
-  PENTHOUSE = 'penthouse',
-  STUDIO = 'studio',
-  CHALET = 'chalet',
+  APARTMENT = 'Apartment',
+  VILLA = 'Villa',
+  PENTHOUSE = 'Penthouse',
+  STUDIO = 'Studio',
+  CHALET = 'Chalet',
 }

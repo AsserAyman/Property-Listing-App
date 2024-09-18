@@ -1,7 +1,7 @@
 export const propertyTypes = [
-    { value: "apartment", label: "Apartment" },
-    { value: "villa", label: "Villa" },
-    { value: "penthouse", label: "Penthouse" },
-    { value: "studio", label: "Studio" },
-    { value: "chalet", label: "Chalet" },
+  { value: "Apartment", label: "Apartment" },
+  { value: "Villa", label: "Villa" },
+  { value: "Penthouse", label: "Penthouse" },
+  { value: "Studio", label: "Studio" },
+  { value: "Chalet", label: "Chalet" },
 ];
