@@ -23,8 +23,8 @@ export default function Home() {
             alt="Beautiful home"
             width={600}
             height={400}
-            layout="responsive"
             className="rounded-lg"
+            priority
           />
         </div>
       </main>

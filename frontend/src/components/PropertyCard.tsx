@@ -15,7 +15,9 @@ export default function PropertyCard({ property }: { property: Property }) {
                 src={imagePath}
                 alt={`${property.type} in ${property.projectInfo.project}`}
                 fill
-                objectFit='cover'
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
               />
             </div>
             <div className="p-4">
