@@ -15,13 +15,11 @@ export class PropertyService {
   ) {}
 
   async create(createPropertyDto: CreatePropertyDto) {
-    const projectInfo = await this.projectInfoRepository.findOne({
-      where: { project: createPropertyDto.project },
-    });
-
-    if (!projectInfo) {
-      throw new NotFoundException('Project not found');
-    }
+    const projectInfo = await this.projectInfoRepository
+      .findOneByOrFail({ project: createPropertyDto.project })
+      .catch(() => {
+        throw new NotFoundException('Project not found');
+      });
 
     const property = this.propertyRepository.create({
       ...createPropertyDto,
@@ -58,14 +56,14 @@ export class PropertyService {
   }
 
   async findOne(id: number): Promise<Property> {
-    try {
-      return await this.propertyRepository.findOneOrFail({
+    return await this.propertyRepository
+      .findOneOrFail({
         where: { id },
         relations: ['projectInfo'],
+      })
+      .catch(() => {
+        throw new NotFoundException('Property not found!');
       });
-    } catch {
-      throw new NotFoundException('Property not found!');
-    }
   }
 
   remove(id: number): Promise<DeleteResult> {
